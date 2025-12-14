@@ -1,15 +1,7 @@
-grafana:
-  enabled: true
-  adminPassword: changeme
+controller:
   service:
     type: LoadBalancer
-prometheus:
-  prometheusSpec:
-    retention: 30d
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 10Gi
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
