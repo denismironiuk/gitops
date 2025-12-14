@@ -1,7 +1,8 @@
 controller:
   service:
     type: LoadBalancer
-  metrics:
-    enabled: true
-    serviceMonitor:
-      enabled: true
+    annotations:
+      # Форсируем NLB даже без AWS LB Controller
+      service.beta.kubernetes.io/aws-load-balancer-type: "external"
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
+      service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
