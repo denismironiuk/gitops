@@ -10,10 +10,9 @@ spec:
   project: default
   source:
     repoURL: https://github.com/denismironiuk/gitops
-    targetRevision: HEAD
+    targetRevision: main
     path: clusters/dev/infrastructure
-    directory:
-      recurse: true
+    
       
   destination:
     server: https://kubernetes.default.svc
