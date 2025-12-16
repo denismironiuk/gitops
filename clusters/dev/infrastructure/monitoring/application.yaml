@@ -4,6 +4,7 @@ kind: Application
 metadata:
   name: monitoring
   namespace: argocd
+  argocd.argoproj.io/sync-wave: "3"  # ← ДОБАВЬ ЭТО
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
