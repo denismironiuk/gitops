@@ -1,16 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root
+  name: platform-root
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: git@github.com:denismironiuk/gitops.git
+    repoURL: https://github.com/your-org/platform-infra
     targetRevision: main
-    path: apps
+    path: gitops/clusters/dev
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
