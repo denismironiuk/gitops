@@ -1,8 +1,8 @@
-# clusters/dev/root-app.yaml
+# clusters/dev/infrastructure/cert-manager-issuers/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: platform-root
+  name: cert-manager-issuers
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,11 +11,16 @@ spec:
   source:
     repoURL: https://github.com/denismironiuk/gitops
     targetRevision: main
-    path: clusters/dev/infrastructure
+    path: clusters/dev/infrastructure/cert-manager-issuers
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

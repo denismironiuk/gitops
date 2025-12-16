@@ -1,11 +1,13 @@
+# clusters/dev/infrastructure/cert-manager/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-
   source:
     repoURL: https://charts.jetstack.io
     chart: cert-manager
@@ -13,11 +15,13 @@ spec:
     helm:
       values: |
         installCRDs: true
-
+        prometheus:
+          enabled: true
+          serviceMonitor:
+            enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
-
   syncPolicy:
     automated:
       prune: true
