@@ -13,26 +13,29 @@ spec:
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
     chart: ingress-nginx
+
     targetRevision: 4.14.1
+
     helm:
       values: |
-        admissionWebhooks:
-          enabled: false
+        
         controller:
-          admissionWebhooks:
-            enabled: false
+          replicaCount: 1
+
+          publishService:
+          enabled: true
+
           service:
             type: LoadBalancer
-          metrics:
-            enabled: true
-            serviceMonitor:
-              enabled: true
-          config:
-            use-forwarded-headers: "true"
-            compute-full-forwarded-for: "true"
-            use-proxy-protocol: "false"
-          ingressClassResource:
-            default: true
+
+            annotations:
+              service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+              service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+              service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+              service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+
+  admissionWebhooks:
+    enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
