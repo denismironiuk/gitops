@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-org/platform-infra
+    repoURL: https://github.com/denismironiuk/gitops
     targetRevision: main
-    path: gitops/clusters/dev
+    path: clusters/dev
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
