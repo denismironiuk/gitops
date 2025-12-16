@@ -19,6 +19,8 @@ spec:
         admissionWebhooks:
           enabled: false
         controller:
+          admissionWebhooks:
+            enabled: false
           service:
             type: LoadBalancer
           metrics:
