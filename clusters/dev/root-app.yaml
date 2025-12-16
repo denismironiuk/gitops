@@ -11,7 +11,10 @@ spec:
   source:
     repoURL: https://github.com/denismironiuk/gitops
     targetRevision: HEAD
-    path: clusters/dev/infrastructure/ingress-nginx
+    path: clusters/dev/infrastructure
+    directory:
+      recurse: true
+      
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
