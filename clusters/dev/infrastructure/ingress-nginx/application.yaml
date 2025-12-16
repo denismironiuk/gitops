@@ -3,31 +3,20 @@ kind: Application
 metadata:
   name: ingress-nginx
   namespace: argocd
-
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
-
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-
 spec:
   project: default
-
   source:
-    repoURL: https://github.com/denismironiuk/gitops.git
-    targetRevision: main
-    path: clusters/dev/infrastructure/ingress-nginx
+    repoURL: https://github.com/denismironiuk/gitops
+    path: charts/ingress-nginx
+    targetRevision: HEAD
     helm:
-      valueFiles:
-        - values.yaml
-
+      values: |
+        controller:
+          replicaCount: 2
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
-
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
