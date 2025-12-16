@@ -16,6 +16,8 @@ spec:
     targetRevision: 4.8.3
     helm:
       values: |
+        admissionWebhooks:
+          enabled: false
         controller:
           service:
             type: LoadBalancer
