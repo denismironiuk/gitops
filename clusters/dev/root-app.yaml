@@ -10,8 +10,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/denismironiuk/gitops
-    targetRevision: main
-    path: clusters/dev/infrastructure
+    targetRevision: HEAD
+    path: clusters/dev/infrastructure/ingress-nginx
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
